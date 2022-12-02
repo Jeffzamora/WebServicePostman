@@ -30,6 +30,28 @@
             return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function update_categoria($cat_id,$cat_nom,$cat_obs){
+            $conectar=parent::Conexion();
+            parent::set_names();
+            $sql="UPDATE categoria SET cat_nom =?, cat_obs =? WHERE cat_id = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $cat_nom);
+            $sql->bindValue(2, $cat_obs);
+            $sql->bindValue(3, $cat_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function delete_categoria($cat_id){
+            $conectar=parent::Conexion();
+            parent::set_names();
+            $sql="UPDATE categoria SET est = '0' WHERE cat_id = ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $cat_id);
+            $sql->execute();
+            return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+
     }
 
 ?>
